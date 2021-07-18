@@ -3,7 +3,8 @@
 This repository is used to exchange study notes for learning golang.
 **Welcome all  bosses to communicate and give pointers**
 
-
+The List of notes
+> 1. [standard-library](https://github.com/fireunix-pangolin/golang-from-introduction-to-abandonment/blob/main/standard-library.md)
 
 Hi~ Hello all big bosses
 I am *hanzhongzi*,Here are some self-introduction charts,I am a noob (**Vegetable dog**)
