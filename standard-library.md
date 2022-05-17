@@ -38,7 +38,7 @@
 
 - Go 不会对自动对数据类型转换，因此左、右操作数类型必须一致或某个字面量，可通过 类型名(数据)的语法将数据转换为对应类型。需要注意值截断和值溢出问题
 - 不支持指针运算，string是值类型，默认是空字符串，不nil
-- math库中就有了最大值 math.MaxInt6 math.MaxFloat64 math.MaxUint32  
+- math库中就有了最大值 math.MaxInt64 math.MaxFloat64 math.MaxUint32  
 ```golang
 
 package typt_test
