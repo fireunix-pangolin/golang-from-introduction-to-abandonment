@@ -35,7 +35,29 @@
 | 枚举       | = iota     |                                                              |                                                              | 用法高端待研究                                               |
 | [指针]()   |            |                                                              |                                                              |                                                              |
 
+
 Go 不会对自动对数据类型转换，因此左、右操作数类型必须一致或某个字面量，可通过 类型名(数据)的语法将数据转换为对应类型。需要注意值截断和值溢出问题
+
+```golang
+
+package typt_test
+
+import "testing"
+
+type MyInt int64
+
+func TestType(t *testing.T) {
+	var a int32 = 1
+	var b int64
+	// b = a //不支持隐式转换
+	// c = MyInt(a) //别名显示类型转换也不行
+	b = int64(a)
+	t.Log(a, b)
+
+}
+
+
+```
 
 ----
 
