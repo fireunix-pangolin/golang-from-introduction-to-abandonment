@@ -48,3 +48,34 @@ func TestSet(t *testing.T) {
 --- PASS: TestSet (0.00s)
 
 ```
+
+## string
+- string 是数据类型，不是引用或指针类型
+- string 是**只读**的byte slice,len函数可以获取包含 byte的个数，和实际有多少字符不一样
+- string 的 byte数组可以存放任何数据
+
+```golang
+package string
+
+import "testing"
+
+func TestString(t *testing.T) {
+	//string 是数据类型，不是引用或指针类型
+	//string 是只读的byte slice,len函数可以获取包含 byte的数 ,和实际有多少字符不一样
+	//string 的 byte数组可以存放任何数据
+	var s string
+	s = "hello"
+	t.Log(s, len(s))
+	s1 := "\xE4\xB8\xA5"
+	t.Log(s1, len(s1))
+}
+
+=== RUN   TestString
+    string_test.go:11: hello 5
+    string_test.go:13: 严 3
+--- PASS: TestString (0.00s)
+PASS
+
+
+
+```
