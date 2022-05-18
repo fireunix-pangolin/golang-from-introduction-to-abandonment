@@ -58,7 +58,7 @@ func TestSet(t *testing.T) {
 package string
 
 import "testing"
-
+// 字符串常用函数 俩个常用的package  strings 和 strconv
 func TestString(t *testing.T) {
 	//string 是数据类型，不是引用或指针类型
 	//string 是**只读**的byte slice,len函数可以获取包含 byte的数 ,和实际有多少字符不一样
@@ -75,6 +75,7 @@ func TestString(t *testing.T) {
 	t.Log("中 unicode 是一种字符集 ：", c[0], "中 utf8 转换为字节序列的规则 ：", s3)
 	t.Logf("中 unicode 是一种字符集 %x ; 中 utf8 转换为字节序列的规则 ： %x", c[0], s3)
 }
+
 
 === RUN   TestString
     string_test.go:11: hello 5
