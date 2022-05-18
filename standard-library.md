@@ -401,3 +401,53 @@ func TestSliceShareMemory(t *testing.T) {
 - 数组容量不可伸缩，切片可以。
 - 数组只能是相同维数和元素个数相同，每个元素相同则同。切片是不能比较的 只能和nil比较。
 
+### map声明
+- 没有 cap()函数
+- 没有的键也会返回的零值，访问不存在的键依然会返回0值，所以不能通过返回nil来判断元素是否存在
+```golang
+package map_test
+
+import (
+	"testing"
+)
+
+func TestMap(t *testing.T) {
+	m := map[string]int{"one": 1, "two": 2, "three": 3}
+	t.Log("len m:", len(m))
+	m1 := map[string]int{}
+	m1["one"] = 1
+	t.Log("len m:", len(m1))
+	m2 := make(map[string]int, 10) //这里第二个参数是capacity 不是len
+	t.Log("len m:", len(m2))
+	//map会自动扩容，但扩容会导致内存分配和数据复制，所以如果能够初始化到比较适合的capacity，可以提高性能。
+
+	t.Log("m: ", m, "m1: ", m1, "m2: ", m2)
+
+	//1.初始化空map访问不存在的值是返回默认初始化
+	m3 := map[int]int{}
+	//t.Log(m3[2]) //返回的零值，访问不存在的键依然会返回0值，所以不能通过返回nil来判断元素是否存在
+	//正确的访问
+	if v, ok := m3[20]; ok {
+		t.Log("key 3 is existing", v)
+	} else {
+		t.Log("key is not in")
+	}
+
+	//遍历map
+	for i, v := range m {
+		t.Log(i, v)
+	}
+}
+=== RUN   TestMap
+    map_test.go:9: len m: 3
+    map_test.go:12: len m: 1
+    map_test.go:14: len m: 0
+    map_test.go:17: m:  map[one:1 three:3 two:2] m1:  map[one:1] m2:  map[]
+    map_test.go:26: key is not in
+    map_test.go:31: one 1
+    map_test.go:31: two 2
+    map_test.go:31: three 3
+--- PASS: TestMap (0.00s)
+
+
+```
