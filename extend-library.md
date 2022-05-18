@@ -61,21 +61,28 @@ import "testing"
 
 func TestString(t *testing.T) {
 	//string 是数据类型，不是引用或指针类型
-	//string 是只读的byte slice,len函数可以获取包含 byte的数 ,和实际有多少字符不一样
+	//string 是**只读**的byte slice,len函数可以获取包含 byte的数 ,和实际有多少字符不一样
 	//string 的 byte数组可以存放任何数据
 	var s string
 	s = "hello"
 	t.Log(s, len(s))
 	s1 := "\xE4\xB8\xA5"
 	t.Log(s1, len(s1))
+
+	s3 := "中"
+	t.Log(len(s3))  //是byte数
+	c := []rune(s3) //获取unicode
+	t.Log("中 unicode 是一种字符集 ：", c[0], "中 utf8 转换为字节序列的规则 ：", s3)
+	t.Logf("中 unicode 是一种字符集 %x ; 中 utf8 转换为字节序列的规则 ： %x", c[0], s3)
 }
 
 === RUN   TestString
     string_test.go:11: hello 5
     string_test.go:13: 严 3
+    string_test.go:16: 3
+    string_test.go:18: 中 unicode 是一种字符集 ： 20013 中 utf8 转换为字节序列的规则 ： 中
+    string_test.go:19: 中 unicode 是一种字符集 4e2d ; 中 utf8 转换为字节序列的规则 ： e4b8ad
 --- PASS: TestString (0.00s)
-PASS
-
 
 
 ```
