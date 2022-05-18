@@ -335,7 +335,7 @@ func TestArray(t *testing.T) {
 ```
 
 ### 切片
-- 可变长数组，【指针，len元素个数，cap 内部数组的容量】
+- 可变长数组，【指针，len元素个数只能初始化到这里，cap 内部数组的容量】 ,未初始化元素不可访问
 ```golang
 package slice
 
@@ -343,17 +343,61 @@ import "testing"
 
 func TestSlice(t *testing.T) {
 	var s0 []int //切片声明
+	s1 := []int{1, 2, 3, 4}
+	s2 := make([]int, 3, 5)
+	t.Log("s1: ", len(s1), cap(s1), "s2: ", len(s2), cap(s2))
 	t.Log(len(s0), cap(s0))
-	s0 = append(s0, 1)
+	s0 = append(s0, 1) //填充切片
 	t.Log(len(s0), cap(s0))
 }
 
-go test -v slice_test.go                                                        15:17:35  
+go test -v slice_test.go
+
 === RUN   TestSlice
-    slice_test.go:7: 0 0
-    slice_test.go:9: 1 1
+    slice_test.go:9: s1:  4 4 s2:  3 5
+    slice_test.go:10: 0 0
+    slice_test.go:12: 1 1
 --- PASS: TestSlice (0.00s)
+
+//切片的增长规律
+func TestSliceGrowing(t *testing.T) {
+	s := []int{}
+	for i := 0; i < 10; i++ {
+		s = append(s, i)//连续的存储空间会变，所以需要 =，会新创建然后拷贝过去。
+		t.Log(len(s), cap(s))
+	}
+}
+    slice_test.go:21: 1 1
+    slice_test.go:21: 2 2
+    slice_test.go:21: 3 4
+    slice_test.go:21: 4 4
+    slice_test.go:21: 5 8
+    slice_test.go:21: 6 8
+    slice_test.go:21: 7 8
+    slice_test.go:21: 8 8
+    slice_test.go:21: 9 16
+    slice_test.go:21: 10 16
+
+func TestSliceShareMemory(t *testing.T) {
+	test := []string{"a", "b", "c", "d", "e", "f", "g"}
+	q1 := test[2:3]
+	t.Log(q1, len(q1), cap(q1)) //从这里发现指定的是原来的连续的存储空间
+	q2 := test[2:4]
+	t.Log(q2, len(q2), cap(q2)) //从这里发现指定的是原来的连续的存储空间
+	q2[0] = "wakakak"
+	t.Log(q2, len(q2), cap(q2))
+	t.Log(q1, len(q1), cap(q1)) //从这里发现共享了原来的数组
+}
+    slice_test.go:28: [c] 1 5
+    slice_test.go:30: [c d] 2 5
+    slice_test.go:32: [wakakak d] 2 5
+    slice_test.go:33: [wakakak] 1 5
 
 
 ```
+
+
+### 数组和切片的区别
+- 数组容量不可伸缩，切片可以。
+- 数组只能是相同维数和元素个数相同，每个元素相同则同。切片是不能比较的。
 
