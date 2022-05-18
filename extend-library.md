@@ -55,9 +55,11 @@ func TestSet(t *testing.T) {
 - string 的 byte数组可以存放任何数据
 
 ```golang
+
 package string
 
 import "testing"
+
 // 字符串常用函数 俩个常用的package  strings 和 strconv
 func TestString(t *testing.T) {
 	//string 是数据类型，不是引用或指针类型
@@ -74,16 +76,35 @@ func TestString(t *testing.T) {
 	c := []rune(s3) //获取unicode
 	t.Log("中 unicode 是一种字符集 ：", c[0], "中 utf8 转换为字节序列的规则 ：", s3)
 	t.Logf("中 unicode 是一种字符集 %x ; 中 utf8 转换为字节序列的规则 ： %x", c[0], s3)
+
+	//遍历字符串
+	s4 := "每天好好上班，努力学习"
+	for _, v := range s4 {
+		t.Logf("%[1]c,%[1]d", v)
+	}
 }
 
 
 === RUN   TestString
-    string_test.go:11: hello 5
-    string_test.go:13: 严 3
-    string_test.go:16: 3
-    string_test.go:18: 中 unicode 是一种字符集 ： 20013 中 utf8 转换为字节序列的规则 ： 中
-    string_test.go:19: 中 unicode 是一种字符集 4e2d ; 中 utf8 转换为字节序列的规则 ： e4b8ad
+    string_test.go:12: hello 5
+    string_test.go:14: 严 3
+    string_test.go:17: 3
+    string_test.go:19: 中 unicode 是一种字符集 ： 20013 中 utf8 转换为字节序列的规则 ： 中
+    string_test.go:20: 中 unicode 是一种字符集 4e2d ; 中 utf8 转换为字节序列的规则 ： e4b8ad
+    string_test.go:25: 每,27599
+    string_test.go:25: 天,22825
+    string_test.go:25: 好,22909
+    string_test.go:25: 好,22909
+    string_test.go:25: 上,19978
+    string_test.go:25: 班,29677
+    string_test.go:25: ，,65292
+    string_test.go:25: 努,21162
+    string_test.go:25: 力,21147
+    string_test.go:25: 学,23398
+    string_test.go:25: 习,20064
 --- PASS: TestString (0.00s)
+PASS
+
 
 
 ```
