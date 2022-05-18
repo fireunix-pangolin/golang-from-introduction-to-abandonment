@@ -335,3 +335,25 @@ func TestArray(t *testing.T) {
 ```
 
 ### 切片
+- 可变长数组，【指针，len元素个数，cap 内部数组的容量】
+```golang
+package slice
+
+import "testing"
+
+func TestSlice(t *testing.T) {
+	var s0 []int //切片声明
+	t.Log(len(s0), cap(s0))
+	s0 = append(s0, 1)
+	t.Log(len(s0), cap(s0))
+}
+
+go test -v slice_test.go                                                        15:17:35  
+=== RUN   TestSlice
+    slice_test.go:7: 0 0
+    slice_test.go:9: 1 1
+--- PASS: TestSlice (0.00s)
+
+
+```
+
