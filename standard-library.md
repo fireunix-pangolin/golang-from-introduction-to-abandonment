@@ -229,6 +229,20 @@ default:
 fmt.Println()
 
 }
+
+// if else 类似的写法
+func TestSwitch(t *testing.T) {
+	var a int = 2
+	switch {
+	case 0 <= a && a < 3:
+		fmt.Print("0-3")
+	case 3 <= a && a < 6:
+		fmt.Print("3-6")
+	default:
+		fmt.Printf("%d.", a)
+	}
+}
+
 ```
 
 也可以初始化子语句，多个语句之间使用逗号(;)分隔
