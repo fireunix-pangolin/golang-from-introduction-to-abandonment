@@ -301,4 +301,30 @@ for i,e := range text {
 | map   | ` var  test map[string]string`                         | map 声明需要指定组成元素 key 和 value 的类型，在声明后，会被初始化为 nil，表示  暂不存在的映射 | a) 使用字面量初始化:`map[ktype]vtype{k1:v1, k2:v2, …, kn:vn} `b) 使用字面量初始化空映射:`map[ktype]vtype{ }` c) 使用  make 函数初始化 `make(map[ktype]vtype)`，通过 make 函数创建映射 | 和字典一样访问                                               | `len()  k,v := students["test"] `存在 v为true 否则为false  `delete(test_map,3)  ` |
 |       |                                                        |                                                              |                                                              |                                                              |                                                              |
 
-持续更新中......
+### 数组
+```golang
+
+package array
+
+import "testing"
+
+func TestArray(t *testing.T) {
+	//数组的声明
+	var a [3]int //声明斌初始化默认值,默认初始化为0值
+	a[0] = 1
+	b := [3]int{1, 2, 3}
+	c := [2][2]int{{2, 3}, {4, 5}}
+	d := [...]int{1, 2, 3, 4, 5, 56}
+	t.Log("a:", a, "b:", b, "c:", c, "d:", d)
+	//遍历数组 法1
+	for i := 0; i < len(d); i++ {
+		t.Log("d: for :", d[i])
+	}
+	//遍历数组 法2
+	for idx, e := range d {
+		t.Log(idx, e)
+	}
+}
+
+
+```
