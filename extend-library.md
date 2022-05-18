@@ -108,3 +108,53 @@ PASS
 
 
 ```
+
+
+## sting 常用函数
+
+```golang
+
+package string
+
+import (
+	"strconv"
+	"strings"
+	"testing"
+)
+
+func TestStringFn(t *testing.T) {
+	s := "A,B,C"
+	parts := strings.Split(s, ",") //字符串分割
+	for _, v := range parts {
+		t.Log(v)
+	}
+	t.Log(strings.Join(parts, "+")) //字符串的连接
+}
+
+func TestStringtoInt(t *testing.T) {
+	s := strconv.Itoa(10) //int转string
+	t.Log("str" + s)
+	if i, err := strconv.Atoi("20"); err == nil { //string转int
+		t.Log(10 + i)
+	} else {
+		t.Log("转化错误")
+	}
+
+}
+
+
+=== RUN   TestStringFn
+    string_func_test.go:13: A
+    string_func_test.go:13: B
+    string_func_test.go:13: C
+    string_func_test.go:15: A+B+C
+--- PASS: TestStringFn (0.00s)
+=== RUN   TestStringtoInt
+    string_func_test.go:20: str10
+    string_func_test.go:22: 30
+--- PASS: TestStringtoInt (0.00s)
+PASS
+
+
+```
+
