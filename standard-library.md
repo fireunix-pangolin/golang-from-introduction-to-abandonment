@@ -324,7 +324,14 @@ func TestArray(t *testing.T) {
 	for idx, e := range d {
 		t.Log(idx, e)
 	}
+	//数组的截取
+	e := d[1:2] //a[开始索引(包含)，结束索引(不包含)]
+	//
+	e := d[1:2] //a[开始索引(包含)，结束索引(不包含)]
+	t.Log(e)
 }
 
 
 ```
+
+### 切片
