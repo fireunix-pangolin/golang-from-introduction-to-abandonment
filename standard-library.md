@@ -234,6 +234,10 @@ fmt.Println()
 func TestSwitch(t *testing.T) {
 	var a int = 2
 	switch {
+	case 100 == a, a == 200:
+		{
+			fmt.Print("100")
+		}
 	case 0 <= a && a < 3:
 		fmt.Print("0-3")
 	case 3 <= a && a < 6:
