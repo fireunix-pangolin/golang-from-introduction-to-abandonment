@@ -160,7 +160,7 @@ var pointer03 *string
 
 ### 1.if 条件语句
 
-```
+```golang
 if bool {
 
  
@@ -174,6 +174,24 @@ if bool {
  
 
 }
+
+//if 支持变量赋值
+package ifandfor
+
+import "testing"
+
+func TestIF(t *testing.T) {
+	if a := 1 == 1; a {
+		t.Log("1 = = 1")
+	}
+	//判断错误时用
+	if v, err := someFun(); err == nil {
+		t.Log("1")
+	} else{
+		t.Log("0")
+	}
+}
+
 ```
 
 可以在 if 语句中初始化语句块内的局部变量，多个语句之间使用逗号(;)分隔
@@ -186,10 +204,17 @@ if bool {
 
 根据输入条件的不同选择，不同的语句块进行执行(多分支)
 
-```
-operate :="add"
+- 条件表达式 不限制常量或者整数
+- 单个case中可以出现多个结果选项，使用，号分割
+- 与c语言相反，不需要用break退出case
+- 可以不设置switch之后的条件表达式，这样逻辑就喝 多个if else的逻辑相同
 
-switch operate{
+
+
+```golang
+//operate :="add"
+
+switch operate :="add"; operate{
 
 case "add":
 
