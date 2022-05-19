@@ -142,6 +142,9 @@ FAIL
  
  
  # recover
+  - 小心程序成为僵尸进程
+  - 可以crash重启
+
  
  ```golang
  
