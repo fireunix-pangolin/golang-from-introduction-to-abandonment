@@ -90,6 +90,18 @@ func TestDog(t *testing.T) {
 	dog.SpeakTo("Chao")
 }
 
+//匿名嵌套，不需要自己写方法 ,好像获得了继承，但是这样是不可以重载父类的方法
+type Cat struct {
+	Pet
+}
+
+func TestCat(t *testing.T) {
+	cat := new(Cat)
+	cat.Speak()
+	cat.SpeakTo("miaomiaomiao")
+}
+
+
 
 
 ```
