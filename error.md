@@ -99,3 +99,71 @@ PASS
 
 ## 及早失败，避免嵌套
 - 一般是判断有错，输出错误然后return
+
+# panic 退出不可恢复的错误
+  - panic 用于不可恢复的错误
+  - panic 退出前会执行defer指定的内容
+  - 和 os.Exit 退出时不会调用defer指定的函数，不输出当前调用栈信息
+ ```golang
+ func TestPanic(t *testing.T) {
+	defer func() {
+		fmt.Println("出错啦！", time.Now())
+	}()
+
+	fmt.Println("panic start")
+	panic(errors.New("someting wrong!"))
+}
+
+=== RUN   TestPanic
+panic start
+出错啦！ 2022-05-19 14:23:37.640677 +0800 CST m=+0.001330668
+--- FAIL: TestPanic (0.00s)
+panic: someting wrong! [recovered]
+        panic: someting wrong!
+
+goroutine 5 [running]:
+testing.tRunner.func1.2({0x1022d78e0, 0x1400004c540})
+        /Users/zhanghanzhong/sdk/go1.17.7/src/testing/testing.go:1209 +0x258
+testing.tRunner.func1(0x1400010e4e0)
+        /Users/zhanghanzhong/sdk/go1.17.7/src/testing/testing.go:1212 +0x284
+panic({0x1022d78e0, 0x1400004c540})
+        /Users/zhanghanzhong/sdk/go1.17.7/src/runtime/panic.go:1038 +0x21c
+command-line-arguments.TestPanic(0x1400010e4e0)
+        /Users/zhanghanzhong/go_learn/src/error/error/error_test.go:55 +0xc8
+testing.tRunner(0x1400010e4e0, 0x1022f1258)
+        /Users/zhanghanzhong/sdk/go1.17.7/src/testing/testing.go:1259 +0xfc
+created by testing.(*T).Run
+        /Users/zhanghanzhong/sdk/go1.17.7/src/testing/testing.go:1306 +0x328
+FAIL    command-line-arguments  0.415s
+FAIL
+
+ 
+ ```
+ 
+ 
+ # recover
+ 
+ ```golang
+ 
+ func TestPanic1(t *testing.T) {
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Println("recovered from ", err)
+		}
+	}()
+
+	fmt.Println("panic start")
+	panic(errors.New("someting wrong!"))
+}
+ 
+ === RUN   TestPanic1
+panic start
+recovered from  someting wrong!
+--- PASS: TestPanic1 (0.00s)
+PASS
+ok      command-line-arguments  0.408s
+
+ 
+ ```
+ 
+ 
